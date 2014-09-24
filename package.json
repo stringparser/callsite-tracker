@@ -2,8 +2,8 @@
   "name": "callsite-tracker",
   "description": "callsite-based information tool",
   "version": "1.0.0",
-  "repository": "stringparser/caller-tracker",
-  "homepage": "https://github.com/stringparser/caller-site",
+  "repository": "stringparser/callsite-tracker",
+  "homepage": "https://github.com/stringparser/callsite-tracker",
   "author": "Javier Carrillo <stringparser@gmail.com>",
   "tags": [
     "caller",
