@@ -2,15 +2,15 @@
 
 var path = require('path');
 var type = require('utils-type');
+var callsites = require('v8-callsites');
 
 var wd = process.cwd();
-var callsites = require('v8-callsites');
 
 module.exports = createTracker;
 
-function createTracker(frames, Ctor){
+function createTracker(frames, origin){
 
-  var sites = callsites(frames, Ctor || createTracker);
+  var sites = callsites(frames, origin || createTracker);
 
   function tracker(pin){
 
@@ -20,8 +20,6 @@ function createTracker(frames, Ctor){
     if( !frame ){
       return { };
     }
-
-    tracker.path = frame.getFileName().replace(/^native[ ]+/, '');
 
     var snapshot = frame+'';
     var location = snapshot.match(/\((.*)\)/);
@@ -47,9 +45,12 @@ function createTracker(frames, Ctor){
       (2) unknown location
     */
 
+    tracker.path = frame.getFileName().replace(/^native[ ]+/, '');
+
     var extension = path.extname(tracker.path) || '';
-    var noExt = tracker.path.replace(tracker.extension, '');
     var basename = path.basename(tracker.path, extension);
+
+    var noExt = tracker.path.replace(extension, '');
     if( basename ===  noExt ){
        // ^ path === 'file.js' or path === 'moduleName'
        //   can only be so for node core or V8 modules
