@@ -110,7 +110,7 @@ You want to know stuff.
 
 By default two frames are recorded, though you can even lower it to one providing a function from which start.
 
-### inspirated by
+### inspirated and based on
 
 It serves for the same use cases implemented on this cool modules
 
