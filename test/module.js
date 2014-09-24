@@ -9,7 +9,7 @@ var track;
 module.exports = function(){
 
   it('at `it` cb => "mocha"', function origin(){
-    track = tracker(origin);
+    track = tracker(3, origin);
     should(track.module).be.equal('mocha');
   });
 

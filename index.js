@@ -77,8 +77,8 @@ function createTracker(frames, Ctor){
     var dir = tracker.path.split(path.sep);
     var index = dir.indexOf('node_modules');
 
-    delete tracker.isCore;
-    delete tracker.isNative;
+    tracker.isCore = false;
+    tracker.isNative = false;
 
     if( index < 0 ){
       // is your code
@@ -123,6 +123,8 @@ function createTracker(frames, Ctor){
   tracker.column = '';
   tracker.basename = '';
   tracker.extension = '';
+  tracker.isCore = false;
+  tracker.isNative = false;
 
   // ## for a better loggin experience
   tracker.stack = [ ];

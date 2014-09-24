@@ -17,7 +17,7 @@
   "license": "MIT",
   "dependencies": {
     "utils-type": "^0.1.32",
-    "v8-callsites": "^1.0.22"
+    "v8-callsites": "^1.0.26"
   },
   "devDependencies": {
     "jshint": "^2.5.5",
