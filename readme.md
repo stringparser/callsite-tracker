@@ -35,17 +35,8 @@ which will output
   module: 'mocha',
   scope: 'mocha/lib',
   path: '/home/jcm/npm/lib/node_modules/mocha/lib/runner.js',
-  at: 'Runner.runTest',
-  line: '373',
-  column: '10',
-  basename: 'runner',
-  extension: '.js',
   isCore: false,
   isNative: false,
-  stack:
-   [ 'callFn (/home/jcm/npm/lib/node_modules/mocha/lib/runnable.js:249:21)',
-     'Test.Runnable.run (/home/jcm/npm/lib/node_modules/mocha/lib/runnable.js:242:7)',
-     'Runner.runTest (/home/jcm/npm/lib/node_modules/mocha/lib/runner.js:373:10)' ],
   site:
    [ { receiver: [Object], fun: [Function: callFn], pos: 5274 },
      { receiver: [Object], fun: [Function], pos: 5169 },
@@ -86,15 +77,9 @@ that of the `caller`.
 
  - `module`: the module from which that frame comes from.
  - `scope` : the module's module (thats why is called scope you know).
- - `path`  : `__firlename` from which that frame is on your disk.
- - `at`    : the `thing` that got run (from the original stacktrace).
- - `line`  : the line where the `thing` was run.
- - `column`: column of the `__filename` where the `thing` was run.
- - `basename` : there because is internally needed. Sharing is caring, you know? `path.basename(tracker.path)` minus the extension.
- - `extension`: is there because its computed internally, same as `basename`.
+ - `path`  : `__filename` of the frame.
  - `isCore` : was the `module` a `node`'s core module?
  - `isNative` : was a native `v8` module?
- - `stack` : the `string` version of the stack trace.
  - `site` : an array of callsites.
 
 

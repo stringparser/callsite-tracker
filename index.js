@@ -32,14 +32,6 @@ function createTracker(frames, Ctor){
       location = location[1];
     }
 
-    snapshot
-      .replace(/(.*)[ ]+\(.*\:(\d+)\:(\d+)\)|(.*)[ ]+\:(\d+)\:(\d+)/,
-        function($0, $1, $2, $3, $4, $5, $6){
-          tracker.at = $1 || $4;
-          tracker.line = $2 || $5;
-          tracker.column = $3 || $6;
-        });
-
     /* ^ Refering to above ^
 
       Possible location formats:
@@ -55,18 +47,15 @@ function createTracker(frames, Ctor){
       (2) unknown location
     */
 
-    tracker.extension = path.extname(tracker.path) || null;
-    tracker.basename = path.basename(
-      tracker.path, tracker.extension
-    );
-
+    var extension = path.extname(tracker.path) || '';
     var noExt = tracker.path.replace(tracker.extension, '');
-    if( tracker.basename ===  noExt ){
+    var basename = path.basename(tracker.path, extension);
+    if( basename ===  noExt ){
        // ^ path === 'file.js' or path === 'moduleName'
        //   can only be so for node core or V8 modules
 
       tracker.isNative = frame.isNative();
-      tracker.scope = tracker.basename;
+      tracker.scope = basename;
 
       tracker.isCore = tracker.isNative ? false : true;
       tracker.module = tracker.isNative ? 'V8' : 'node';
@@ -118,19 +107,8 @@ function createTracker(frames, Ctor){
   tracker.module = '';
   tracker.scope = '';
   tracker.path = '';
-  tracker.at = '';
-  tracker.line = '';
-  tracker.column = '';
-  tracker.basename = '';
-  tracker.extension = '';
   tracker.isCore = false;
   tracker.isNative = false;
-
-  // ## for a better loggin experience
-  tracker.stack = [ ];
-  sites.forEach(function(frame){
-    tracker.stack.push(frame+'');
-  });
 
   tracker.site = sites;
 
