@@ -10,7 +10,7 @@
 
     npm install --save callsite-tracker
 
-## usage
+## example
 
 ```js
 var tracker = require('callsite-tracker');
@@ -24,6 +24,8 @@ describe('tracker', function (){
     console.log(tracked);
   })
 })
+// Of course! this is a mocha test file!
+// its just to illustrate things better.
 ```
 
 which will output
