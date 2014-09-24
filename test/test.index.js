@@ -1,28 +1,22 @@
 'use strict';
 
-var stracker = require('../.');
-var origin = process.stdout.write;
+process.env.NODE_ENV = 'test';
 
-process.stdout.write = (function (write){
-  return function (data, enc, cb){
-    var track = stracker(3);
-    var buffer = '[' + track.parent + '] ';
-    buffer += ' ' + track(0).module + ' ' + data;
-    write.call(process.stdout, buffer, enc, cb);
-  };
-})(origin);
+var fs = require('fs');
+var path = require('path');
 
-it('should return blau', function origin(){
+var testFiles = fs.readdirSync('./test');
 
-  var tracker = stracker(5);
+testFiles.splice(
+  testFiles.indexOf(path.basename(__filename))
+);
 
-  tracker.stack.forEach(function(frame, index){
-    var found = tracker(index);
-    console.log(
-      '('+(index+1)+') ' +
-      found.parent, '->', found.module + '\n',
-      frame + ' '
-    );
-    console.log('');
+var projectName = require('../package').name;
+describe(projectName, function(){
+  testFiles.forEach(function(name){
+    name = path.basename(name, path.extname(name));
+    describe(name, function(){
+      require('./'+name)();
+    });
   });
 });
