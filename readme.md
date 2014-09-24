@@ -4,7 +4,7 @@
 [<img alt="NPM version" src="http://img.shields.io/npm/v/callsite-tracker.svg?style=flat-square" align="right"/>](http://www.npmjs.org/package/callsite-tracker)
 <br>
 
-[V8 stacktrace API](https://code.google.com/p/v8/wiki/JavaScriptStackTraceApi) callsites with knobs.
+[V8 stacktrace API](https://code.google.com/p/v8/wiki/JavaScriptStackTraceApi)-based information tool.
 
 ## install
 
