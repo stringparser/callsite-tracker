@@ -2,7 +2,7 @@
 
 var should = require('should');
 var tracker = require('../.');
-var v8CallsiteMethods = require('v8-callsites/util/methods');
+var v8CallsiteMethods = require('v8-callsites/methods');
 
 var track;
 

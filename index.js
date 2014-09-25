@@ -21,45 +21,23 @@ function createTracker(frames, origin){
       return { };
     }
 
-    var snapshot = frame+'';
-    var location = snapshot.match(/\((.*)\)/);
-
-    if( location === null ){ // Case 1
-      location = snapshot;
-    } else {                 // Case 2
-      location = location[1];
-    }
-
-    /* ^ Refering to above ^
-
-      Possible location formats:
-      --------------------------
-      https://code.google.com/p/v8/wiki/JavaScriptStackTraceApi
-
-      (1) Type.functionName [as methodName] (location)
-      (1) new functionName (location)
-      (1) Type.name (location)
-      (1) eval at Foo.a (eval at Bar.z (myscript.js:10:3))
-      (2) eval at position
-      (2) native
-      (2) unknown location
-    */
-
     tracker.path = frame.getFileName().replace(/^native[ ]+/, '');
+    tracker.location = tracker.path + ':' +
+      frame.getLineNumber() + ':' + frame.getColumnNumber();
 
-    var extension = path.extname(tracker.path) || '';
-    var basename = path.basename(tracker.path, extension);
+    tracker.extension = path.extname(tracker.path) || '';
+    tracker.basename = path.basename(tracker.path, tracker.extension);
 
-    var noExt = tracker.path.replace(extension, '');
-    if( basename ===  noExt ){
+    var noExt = tracker.path.replace(tracker.extension, '');
+    if( tracker.basename ===  noExt ){
        // ^ path === 'file.js' or path === 'moduleName'
        //   can only be so for node core or V8 modules
 
       tracker.isNative = frame.isNative();
-      tracker.scope = basename;
+      tracker.module = tracker.basename;
 
       tracker.isCore = tracker.isNative ? false : true;
-      tracker.module = tracker.isNative ? 'V8' : 'node';
+      tracker.scope = tracker.isNative ? 'V8' : 'node';
 
       return tracker;
     }
@@ -108,8 +86,11 @@ function createTracker(frames, origin){
   tracker.module = '';
   tracker.scope = '';
   tracker.path = '';
+  tracker.location = '';
   tracker.isCore = false;
   tracker.isNative = false;
+  tracker.basename = '';
+  tracker.extension = '';
 
   tracker.site = sites;
 

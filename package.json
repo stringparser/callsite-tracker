@@ -1,7 +1,7 @@
 {
   "name": "callsite-tracker",
   "description": "callsite-based information tool",
-  "version": "1.0.6",
+  "version": "1.0.8",
   "repository": "stringparser/callsite-tracker",
   "homepage": "https://github.com/stringparser/callsite-tracker",
   "author": "Javier Carrillo <stringparser@gmail.com>",
@@ -17,7 +17,7 @@
   "license": "MIT",
   "dependencies": {
     "utils-type": "^0.1.32",
-    "v8-callsites": "^1.0.28"
+    "v8-callsites": "^1.0.30"
   },
   "devDependencies": {
     "jshint": "^2.5.5",
