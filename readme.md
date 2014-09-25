@@ -8,7 +8,8 @@
 <br>
 
 ## install
- [![NPM](https://nodei.co/npm/callsite-tracker.png?mini=true)](https://nodei.co/npm/callsite-tracker/)
+
+    npm install callsite-tracker
 
 ## example
 
