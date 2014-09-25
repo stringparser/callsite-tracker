@@ -17,11 +17,10 @@ function createTracker(frames, origin){
     pin = type(pin).integer > -1 ? pin : sites.length-1;
 
     var frame = sites[pin];
-    if( !frame ){
-      return { };
-    }
+    if( !frame ){ return { }; }
 
     tracker.path = frame.getFileName().replace(/^native[ ]+/, '');
+
     tracker.location = tracker.path + ':' +
       frame.getLineNumber() + ':' + frame.getColumnNumber();
 
@@ -30,7 +29,7 @@ function createTracker(frames, origin){
 
     var noExt = tracker.path.replace(tracker.extension, '');
     if( tracker.basename ===  noExt ){
-       // ^ path === 'file.js' or path === 'moduleName'
+       // ^ path === 'file.js' || path === 'moduleName'
        //   can only be so for node core or V8 modules
 
       tracker.isNative = frame.isNative();
