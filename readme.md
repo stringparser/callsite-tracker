@@ -5,8 +5,10 @@
 <br>
 
 [V8 stacktrace API](https://code.google.com/p/v8/wiki/JavaScriptStackTraceApi)-based information tool.
+<br>
 
-#### install [![NPM](https://nodei.co/npm/callsite-tracker.png?mini=true)](https://nodei.co/npm/callsite-tracker/)
+## install
+ [![NPM](https://nodei.co/npm/callsite-tracker.png?mini=true)](https://nodei.co/npm/callsite-tracker/)
 
 ## example
 
