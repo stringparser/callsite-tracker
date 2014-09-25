@@ -50,13 +50,13 @@ function createTracker(frames, origin){
     if( index < 0 ){
       // is your code
 
-      tracker.scope = path.relative(
-        wd, path.dirname(tracker.path)
-      );
-
       tracker.module = path.relative(
         path.resolve(wd, '..'), wd
       );
+
+      tracker.scope = path.relative(
+        wd, path.dirname(tracker.path)
+      ) || './.';
 
       return tracker;
     }
