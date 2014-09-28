@@ -22,7 +22,7 @@ function createTracker(frames, origin){
     tracker.path = frame.getFileName().replace(/^native[ ]+/, '');
 
     tracker.extension = path.extname(tracker.path) || '';
-    tracker.basename = path.basename(tracker.path, tracker.extension);
+    tracker.basename = path.basename(tracker.path);
 
     tracker.location = tracker.basename + ':' +
       frame.getLineNumber() + ':' + frame.getColumnNumber();
