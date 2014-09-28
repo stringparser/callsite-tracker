@@ -21,11 +21,11 @@ function createTracker(frames, origin){
 
     tracker.path = frame.getFileName().replace(/^native[ ]+/, '');
 
-    tracker.location = tracker.path + ':' +
-      frame.getLineNumber() + ':' + frame.getColumnNumber();
-
     tracker.extension = path.extname(tracker.path) || '';
     tracker.basename = path.basename(tracker.path, tracker.extension);
+
+    tracker.location = tracker.basename + ':' +
+      frame.getLineNumber() + ':' + frame.getColumnNumber();
 
     var noExt = tracker.path.replace(tracker.extension, '');
     if( tracker.basename ===  noExt ){
