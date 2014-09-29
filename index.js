@@ -26,9 +26,7 @@ function Tracker(frames, origin){
 
 Tracker.prototype.get = function(pin){
 
-  pin = this.sites[pin] ? pin : this.sites.length-1;
-
-  var frame = this.sites[pin];
+  var frame = this.sites[pin] || this.sites[this.sites.length-1];
   if( !frame ){ return { }; }
 
   this.path = frame.getFileName();
