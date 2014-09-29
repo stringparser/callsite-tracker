@@ -2,25 +2,19 @@
 
 var should = require('should');
 var tracker = require('../.');
-var path = require('path');
 
-var track;
+var caller;
 
 module.exports = function(){
 
   it('at `it` cb => "mocha/lib"', function origin(){
-    track = tracker(origin);
-    should(track.scope).be.equal('mocha/lib');
+    caller = tracker(origin);
+    should(caller.scope).be.equal('mocha/lib');
   });
 
-  it(' not given => relative dirname to cwd', function(){
+  it(' not given => the project itself', function(){
 
-    track = tracker();
-    should(track.scope).be.equal(
-      path.relative(
-        process.cwd(),
-        __dirname
-      )
-    );
+    caller = tracker();
+    should(caller.scope).be.equal('./.');
   });
 };

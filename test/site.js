@@ -4,14 +4,14 @@ var should = require('should');
 var tracker = require('../.');
 var v8CallsiteMethods = require('v8-callsites/methods');
 
-var track;
+var caller;
 
 module.exports = function(){
 
   it('should provide access to v8-callsites', function origin(){
-    track = tracker();
+    caller = tracker();
 
-    should(track.site[0]).have.properties(
+    should(caller.sites[0]).have.properties(
       v8CallsiteMethods
     );
 
@@ -21,16 +21,23 @@ module.exports = function(){
     }
 
     function bar(){
-      track = tracker(bar);
-      should(track.site[0].getFunctionName()).be
+      caller = tracker(bar);
+      should(caller.sites[0].getFunctionName()).be
         .equal('foo');
     }
   });
 
-  it('should have a path property', function(){
+  it('should provide paths correctly', function (){
 
-    track = tracker();
-    should(track.path).be.equal(__filename);
+    function start(){
+      caller = tracker(origin);
+    }
+
+    function origin(){
+      start();
+    }
+
+    should(caller.path).be.equal(__filename);
 
   });
 };
