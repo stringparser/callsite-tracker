@@ -32,7 +32,7 @@ describe('tracker', function (){
 which will output
 
 ```js
-{ [Function: tracker]
+{
   module: 'mocha',
   scope: 'mocha/lib',
   path: '/home/jcm/npm/lib/node_modules/mocha/lib/runner.js',
@@ -58,10 +58,10 @@ The instance returned can walk through the recorded stack on a simple manner
 var tracker = require('callsite-tracker');
 var tracked = tracker(3);  // <- creates the `tracker` instance
 
-tracked    // looks the same as the above output given
-tracked(1) // will move to the second element of the sites array
-           // and get the same information overriding
-           // whatever value the properties had
+tracked        // looks the same as the above output given
+tracked.get(1) // will move to the second element of the sites array
+               // and get the same information overriding
+               // whatever value the properties had
 ```
 
 ### tracker properties
@@ -81,10 +81,10 @@ that of the `caller`.
  - `path`  : `__filename` of the frame.
  - `isCore` : was the `module` a `node`'s core module?
  - `isNative` : was a native `v8` module?
- - `site` : an array of callsites.
+ - `sites` : an array of callsites.
 
 
-All `tracker.site` elements are callsites so they have their own `api`. Go and see the [avaliable methods](https://code.google.com/p/v8/wiki/JavaScriptStackTraceApi) of the V8 stack trace api like:
+All `tracker.sites` elements are callsites so they have their own `api`. Go and see the [avaliable methods](https://code.google.com/p/v8/wiki/JavaScriptStackTraceApi) of the V8 stack trace api like:
  - `getLineNumber`
  - `getFileName`
  - `getEvalOrigin`
